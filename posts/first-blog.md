@@ -1,24 +1,15 @@
 ---
-title: 'In the current scheme of international student working on a visa'
+title: 'Top down v.s Bottom Up approach'
 date: 2022-07-01
 readTime: '2 min read'
-description: 'This is my first ever blog'
+description: 'how to solve a stupid simple problem in 2 ways'
 author: 'Hoang Nam Dang'
 tags: [ "blogging", "growth"]
 ---
 
-# My First Blog Post
+# Top Down Approach
+Suppose you have a program that takes input A, do some actions B and C, then produce the results D. You supposedly do not have any ideas why those components work, but somehow you manage to replicate the actions that it takes. For example, when I build REPL from scratch, I don't actually build it from scratch like understanding the keystrokes, the bus that connects my keyboard to the screen, how does bytes actually travels to 
 
-Published on: 2022-07-01
 
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
-
-## What I've accomplished
-
-1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
-
-2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
-
-## What's next
-
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+## Bottom up approach
+Suppose you have all the pieces, and an extremely difficult problems. You don't know where to begins, but you surely can solve the problem by understanding the definition of it. For example, you need to intergrate this extremely difficult functions. Although you cannot solve it right away or break it down into probable chunks, you sure can begins with the basic foundation definition of what intergration is. Then, you try to continue to see whether 
