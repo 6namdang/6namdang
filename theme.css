@@ -13,6 +13,14 @@ html.light-mode .text-stone-200,
 html.light-mode .text-stone-300 {
     color: #1c1917 !important;            /* Stone-900 */
 }
+html.light-mode .text-stone-400 {
+    color: #44403c !important; /* Stone-700: significantly darker and more readable */
+}
+
+html.light-mode .text-stone-200 {
+    color: #1c1917 !important; /* Stone-900 */
+    font-weight: 500;           /* Optional: slightly heavier for better emphasis */
+}
 
 /* Borders and dividers */
 html.light-mode .border-stone-800,
@@ -81,4 +89,49 @@ html.light-mode .prose pre {
 
 html.light-mode .prose pre code {
     color: #292524 !important;
+}
+
+
+/* --- Tag Styling for Light Mode --- */
+
+/* This targets the tags in the list view and the single post view */
+html.light-mode #blog-list-container span, 
+html.light-mode #view-blog-detail span {
+    background-color: #808000 !important; /* Olive Green */
+    color: #ffffff !important;            /* White text for high contrast */
+    border-color: #556b2f !important;     /* Darker Olive border */
+    font-weight: 500;
+}
+
+/* If you want a softer, more "muted" Olive look to match the Stone aesthetic: */
+html.light-mode .prose span.text-stone-400,
+html.light-mode #view-blog-detail .rounded-full {
+    background-color: #6b705c !important; /* Earthy Olive/Moss Green */
+    color: #f8f9fa !important;
+    border: none !important;
+}
+
+/* Fix for the hover state on tags if they are inside a link */
+html.light-mode a:hover span {
+    background-color: #556b2f !important; /* Darkens on hover */
+    transition: background-color 0.2s ease;
+}
+
+/* Light Mode Button Overrides */
+html.light-mode #theme-toggle {
+    color: #57534e !important; /* Stone-600 */
+}
+
+html.light-mode #theme-toggle:hover {
+    background-color: #e7e5e4 !important; /* Stone-200 */
+    color: #1c1917 !important; /* Stone-900 */
+}
+
+/* Navbar Underline Color for Light Mode */
+html.light-mode nav a {
+    text-decoration-color: #d6d3d1; /* Muted underline */
+}
+
+html.light-mode nav a:hover {
+    text-decoration-color: #1c1917; /* Dark underline on hover */
 }

@@ -9,11 +9,13 @@
     <script src="theme.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoang Nam Dang</title>
+    <title>Projects</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="theme.css">
-
 </head>
 <body class="bg-stone-950 text-stone-400">
     
@@ -30,9 +32,9 @@
 
                 <button id="menu-btn" class="md:hidden p-2 text-stone-400 hover:text-stone-100 transition-colors focus:outline-none" aria-label="Menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
 
@@ -46,11 +48,17 @@
 
             <div id="view-projects" class="fade-in">
                 <p class="mb-6 text-stone-100 text-xs md:text-sm font-medium w-fit border-b-2 border-stone-100 pb-1">Projects</p>
-                <div class="space-y-4" id="blog-list-container">
+                <div id="project-list-container">
                     </div>
             </div>
+
+            <div id="view-blog-detail" class="hidden fade-in">
+                </div>
+
         </div>
     </div>
+
     <script src="script.js"></script>
+    <script src="projects.js"></script>
 </body>
 </html>

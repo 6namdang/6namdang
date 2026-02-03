@@ -7,6 +7,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="theme.css">
+    <style>
+        /* Ensuring smooth underline transition */
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
 </head>
 <body class="bg-stone-950 text-stone-400">
     
@@ -14,32 +34,40 @@
         <div class="max-w-2xl w-full pt-24 md:pt-32 mx-auto">
       
             <div class="flex items-center justify-between mb-12 relative">
-                <a href="index.html" class="text-xl sm:text-2xl md:text-3xl font-normal text-white cursor-pointer select-none">hoang's portfolio</a>
+                <a href="index.html" class="group relative text-xl sm:text-2xl md:text-3xl font-normal text-white cursor-pointer select-none pb-1">
+                    hoang's portfolio
+                    <span class="absolute bottom-0 left-0 w-0 h-1 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
                 
-                <!---navbar-->
-                <nav class="hidden md:flex gap-6 text-sm font-medium text-stone-400">
-                    <a href="projects.html" class="hover:text-stone-100 transition-colors cursor-pointer">projects</a>
-                    <a href="writings.html" class="hover:text-stone-100 transition-colors cursor-pointer">writing</a>
-                </nav>
-                
-                <button id="theme-toggle" class="p-2 rounded-md hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-500 dark:text-stone-400 transition-colors">
-                    <span id="theme-icon-dark" class="hidden">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2m-18.78 7.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                    </span>
-                    <span id="theme-icon-light">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-                    </span>
-                </button>
-                
-                <button id="menu-btn" class="md:hidden p-2 text-stone-400 hover:text-stone-100 transition-colors focus:outline-none" aria-label="Menu">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-                <!---mobile navbar-->
+                <div class="flex items-center gap-4">
+                    <nav class="hidden md:flex gap-6 text-sm font-medium text-stone-400">
+                        <a href="projects.html" class="relative hover:text-stone-100 transition-colors cursor-pointer pb-1 group">
+                            projects
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="writings.html" class="relative hover:text-stone-100 transition-colors cursor-pointer pb-1 group">
+                            writing
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </nav>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-md hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-500 dark:text-stone-400 transition-colors flex items-center justify-center">
+                        <span id="theme-icon-dark" class="hidden">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2m-18.78 7.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        </span>
+                        <span id="theme-icon-light">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                        </span>
+                    </button>
+                    
+                    <button id="menu-btn" class="md:hidden p-2 text-stone-400 hover:text-stone-100 transition-colors focus:outline-none" aria-label="Menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
 
                 <div id="mobile-menu" class="hidden absolute right-0 top-12 w-32 rounded-md bg-stone-900 border border-stone-800 shadow-xl z-50 overflow-hidden">
                     <div class="py-1">
@@ -48,8 +76,7 @@
                     </div>
                 </div>
 
-                <!---introduction part-->
-            </div>
+                </div>
                 <div class="mb-10">
                     <p class="text-sm md:text-base text-stone-400 leading-relaxed space-y-4">
                         i'm a computer science student at gannon university and a software engineer interested in 
