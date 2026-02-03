@@ -11,8 +11,10 @@
         input[type="password"] { padding: 8px; width: 300px; }
         button { padding: 8px 16px; cursor: pointer; margin: 2px; }
         .nav-btn { background-color: #f0f0f0; border: 1px solid #ccc; }
-        .controls { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-        select { padding: 5px; }
+        .danger-btn { background-color: #ff4444; color: white; border: none; float: right; }
+        .controls { display: flex; gap: 15px; align-items: flex-end; margin-bottom: 10px; flex-wrap: wrap; }
+        .field { display: flex; flex-direction: column; }
+        label { font-size: 0.8em; font-weight: bold; margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -30,25 +32,37 @@
         <button id="logout-btn" style="float: right;">Logout</button>
         
         <div class="controls">
-            <div>
-                <label for="folder-select">Collection:</label>
+            <div class="field">
+                <label>Collection</label>
                 <select id="folder-select">
                     <option value="posts">Posts</option>
                     <option value="projects">Projects</option>
                 </select>
             </div>
 
-            <div>
-                <label for="posts">File:</label>
-                <select id="posts"></select>
+            <div class="field">
+                <label>Existing Files</label>
+                <select id="posts-select"></select>
             </div>
+            
+            <button id="load">Load</button>
         </div>
 
-        <textarea id="content" rows="20"></textarea>
-        <br>
+        <hr>
 
-        <button id="load">Load File</button>
-        <button id="save">Save Changes</button>
+        <div class="controls">
+            <div class="field">
+                <label>New Filename (e.g. hello.md)</label>
+                <input type="text" id="new-filename" placeholder="my-new-post.md">
+            </div>
+            <button id="create-btn">Create New</button>
+        </div>
+
+        <textarea id="content" rows="20" placeholder="Write your content here..."></textarea>
+        
+        <br>
+        <button id="save" style="background-color: #4CAF50; color: white; border: none;">Save Changes</button>
+        <button id="delete-btn" class="danger-btn">Delete File</button>
     </div>
 
 <script>
@@ -59,8 +73,9 @@
     const cmsSection = document.getElementById('cms-section');
     const patInput = document.getElementById('pat-input');
     const folderSelect = document.getElementById('folder-select');
-    const postsSelect = document.getElementById('posts');
+    const postsSelect = document.getElementById('posts-select');
     const contentArea = document.getElementById('content');
+    const newFilenameInput = document.getElementById('new-filename');
 
     function forceLogout(msg) {
         if (msg) alert(msg);
@@ -70,17 +85,14 @@
 
     const getToken = () => sessionStorage.getItem('gh_pat');
 
-    // Fetches files based on the selected folder dropdown
     async function listFiles() {
         const token = getToken();
-        const selectedFolder = folderSelect.value;
+        const folder = folderSelect.value;
         try {
-            const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${selectedFolder}`, {
+            const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`, {
                 headers: { Authorization: `token ${token}` }
             });
-
-            if (!res.ok) throw new Error('Unauthorized');
-
+            if (!res.ok) throw new Error('Auth Failed');
             const data = await res.json();
             postsSelect.innerHTML = ''; 
             data.forEach(file => {
@@ -91,81 +103,100 @@
                     postsSelect.appendChild(option);
                 }
             });
-
             loginSection.classList.add('hidden');
             cmsSection.classList.remove('hidden');
-        } catch (err) {
-            forceLogout('Session expired or access denied.');
-        }
+        } catch (err) { forceLogout('Session expired.'); }
     }
 
-    // Refresh file list when folder changes
     folderSelect.onchange = listFiles;
 
     document.getElementById('login-btn').onclick = () => {
         const val = patInput.value.trim();
-        if (val) {
-            sessionStorage.setItem('gh_pat', val);
-            listFiles();
-        }
+        if (val) { sessionStorage.setItem('gh_pat', val); listFiles(); }
     };
 
     document.getElementById('logout-btn').onclick = () => forceLogout();
 
+    // CREATE: Just sets up the UI for a new file
+    document.getElementById('create-btn').onclick = () => {
+        const name = newFilenameInput.value.trim();
+        if (!name) return alert('Enter a filename first');
+        window.currentPath = `${folderSelect.value}/${name}`;
+        window.currentSha = null; // No SHA means it's a new file
+        contentArea.value = '';
+        alert(`Ready to create: ${window.currentPath}. Add content and click Save.`);
+    };
+
+    // READ
     document.getElementById('load').onclick = async function() {
         const token = getToken();
         try {
             const path = postsSelect.value;
             if (!path) return;
-
             const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
                 headers: { Authorization: `token ${token}` }
             });
-            if (!res.ok) throw new Error('Load failed');
-
             const data = await res.json();
             contentArea.value = decodeURIComponent(escape(atob(data.content)));
             window.currentSha = data.sha;
             window.currentPath = path;
-        } catch (err) {
-            forceLogout('Error loading file. Returning home.');
-        }
+            newFilenameInput.value = ''; // clear create input
+        } catch (err) { forceLogout('Error loading.'); }
     };
 
+    // UPDATE & CREATE (Save)
     document.getElementById('save').onclick = async function() {
         const token = getToken();
         try {
-            if (!window.currentPath || !window.currentSha) return alert('Load a file first!');
-
+            if (!window.currentPath) return alert('Load or Create a file first!');
             const content = contentArea.value;
             const base64 = btoa(unescape(encodeURIComponent(content)));
+            
+            const body = {
+                message: `CMS Update: ${window.currentPath}`,
+                content: base64
+            };
+            if (window.currentSha) body.sha = window.currentSha; // Only needed for updates
 
             const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${window.currentPath}`, {
                 method: 'PUT',
-                headers: {
-                    Authorization: `token ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: `CMS Update: ${window.currentPath}`,
-                    content: base64,
-                    sha: window.currentSha
-                })
+                headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
             });
 
             if (!res.ok) throw new Error('Save failed');
-
             const data = await res.json();
             alert('Saved successfully!');
             window.currentSha = data.content.sha;
-        } catch (err) {
-            forceLogout('Critical save error. Returning home.');
-        }
+            listFiles(); // Refresh dropdown
+        } catch (err) { forceLogout('Critical error during save.'); }
     };
 
-    if (getToken()) {
-        listFiles();
-    }
+    // DELETE
+    document.getElementById('delete-btn').onclick = async function() {
+        if (!window.currentPath || !window.currentSha) return alert('Load a file to delete it.');
+        if (!confirm(`Are you sure you want to delete ${window.currentPath}?`)) return;
+
+        const token = getToken();
+        try {
+            const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${window.currentPath}`, {
+                method: 'DELETE',
+                headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: `CMS Delete: ${window.currentPath}`,
+                    sha: window.currentSha
+                })
+            });
+            if (!res.ok) throw new Error('Delete failed');
+            alert('Deleted successfully');
+            contentArea.value = '';
+            window.currentPath = null;
+            window.currentSha = null;
+            listFiles();
+        } catch (err) { forceLogout('Error during deletion.'); }
+    };
+
+    if (getToken()) listFiles();
 </script>
 </body>
 </html>
