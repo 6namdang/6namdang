@@ -13,4 +13,7 @@ tags:
 
 ![Image](https://plus.unsplash.com/premium_photo-1666901328734-3c6eb9b6b979?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
-The reason why I like to write code slowly is to understand everything that is going on.
+The reason why I like to write code slowly is to understand everything that is going on. Without proper code, there's nothing that I can control.
+
+The idea of using AI to code is a self-destroyed idea. The goal of having a software engineer, or any engineer in general, is to build with constraints. The reason why engineers are valuable because not only are they able to build solutions, they build solutions based on constraints based on the market needs.
+
