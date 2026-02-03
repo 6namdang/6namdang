@@ -1,137 +1,121 @@
-/* theme.css */
+/* theme.css - Consolidated & Optimized for High Contrast */
 
-/* Target body and background */
-html.light-mode body {
-    background-color: #fafaf9 !important; /* Stone-50 */
-    color: #57534e !important;            /* Stone-600 */
+/* --- 1. Global Transitions --- */
+* { 
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
 }
 
-/* Titles, bold text, and hovers */
+/* --- 2. Light Mode Base Overrides --- */
+html.light-mode body {
+    background-color: #fafaf9 !important; /* Stone-50 */
+    color: #292524 !important;            /* Stone-800: Deep gray-black for readability */
+}
+
+/* --- 3. Typography & Contrast Logic --- */
+
+/* High-priority text (Titles, Bold highlights, spans) */
 html.light-mode .text-white,
 html.light-mode .text-stone-100,
 html.light-mode .text-stone-200,
-html.light-mode .text-stone-300 {
-    color: #1c1917 !important;            /* Stone-900 */
+html.light-mode .text-stone-300,
+html.light-mode font-medium {
+    color: #0c0a09 !important;            /* Stone-950: Almost pure black */
+    font-weight: 500;
 }
+
+/* Standard Body/Intro text */
 html.light-mode .text-stone-400 {
-    color: #44403c !important; /* Stone-700: significantly darker and more readable */
+    color: #292524 !important;            /* Stone-800: Much darker than default */
 }
 
-html.light-mode .text-stone-200 {
-    color: #1c1917 !important; /* Stone-900 */
-    font-weight: 500;           /* Optional: slightly heavier for better emphasis */
+/* Secondary/Muted text (Dates, footers) */
+html.light-mode .text-stone-500 {
+    color: #57534e !important;            /* Stone-600 */
 }
 
-/* Borders and dividers */
+/* --- 4. Navigation & Interactive Elements --- */
+html.light-mode nav a,
+html.light-mode #menu-btn,
+html.light-mode #theme-toggle {
+    color: #44403c !important;            /* Stone-700 */
+}
+
+html.light-mode nav a:hover,
+html.light-mode #menu-btn:hover {
+    color: #0c0a09 !important;            /* Stone-950 */
+}
+
+/* Navbar/Link Underlines */
+html.light-mode .nav-link::after,
+html.light-mode nav a span,
+html.light-mode .group-hover\:w-full {
+    background-color: #0c0a09 !important; /* Black underline */
+}
+
+/* --- 5. UI Components --- */
+
+/* Borders and Dividers */
 html.light-mode .border-stone-800,
 html.light-mode .border-b,
-html.light-mode .border-t {
-    border-color: #e7e5e4 !important;     /* Stone-200 */
+html.light-mode .border-t,
+html.light-mode .border-b-2 {
+    border-color: #d6d3d1 !important;     /* Stone-300: Visible but soft */
 }
 
-/* Mobile Menu Fix */
+/* Hover Backgrounds (Cards/List Items) */
+html.light-mode .hover\:bg-stone-800\/80:hover {
+    background-color: #f5f5f4 !important; /* Stone-100 */
+}
+
+/* Mobile Menu */
 html.light-mode #mobile-menu {
     background-color: #ffffff !important;
     border: 1px solid #e7e5e4 !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 html.light-mode #mobile-menu a {
-    color: #57534e !important;
+    color: #292524 !important;
 }
 
-/* Fix icons color */
+/* SVG Icons */
 html.light-mode svg {
-    color: #57534e !important;
+    color: #44403c !important;
 }
 
-/* Smooth transition */
-* { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
-
-
-/* --- Blog Post & Markdown Content Fixes --- */
-
-/* Targets the container used in your script.js loadSinglePost function */
+/* --- 6. Blog & Markdown Content (Prose) --- */
 html.light-mode .prose {
-    /* These variables control Tailwind's typography colors */
-    --tw-prose-body: #57534e !important;
-    --tw-prose-headings: #1c1917 !important;
-    --tw-prose-links: #1c1917 !important;
-    --tw-prose-bold: #1c1917 !important;
-    --tw-prose-counters: #78716c !important;
-    --tw-prose-bullets: #d6d3d1 !important;
-    --tw-prose-quotes: #78716c !important;
-    --tw-prose-code: #1c1917 !important;
+    --tw-prose-body: #292524 !important;
+    --tw-prose-headings: #0c0a09 !important;
+    --tw-prose-links: #0c0a09 !important;
+    --tw-prose-bold: #0c0a09 !important;
+    --tw-prose-counters: #57534e !important;
+    --tw-prose-bullets: #a8a29e !important;
+    --tw-prose-quotes: #44403c !important;
+    --tw-prose-code: #0c0a09 !important;
     --tw-prose-pre-bg: #f5f5f4 !important;
     --tw-prose-pre-code: #292524 !important;
-    --tw-prose-hr: #e7e5e4 !important;
+    --tw-prose-hr: #d6d3d1 !important;
 }
 
-/* Specific overrides for headers inside the blog post */
-html.light-mode .prose h1, 
-html.light-mode .prose h2, 
-html.light-mode .prose h3 {
-    color: #1c1917 !important;
-}
-
-/* Fix for small code snippets inside sentences */
+/* Inline Code Snippets */
 html.light-mode .prose :not(pre) > code {
-    background-color: #e7e5e4 !important; /* Stone-200 */
-    color: #1c1917 !important;
+    background-color: #e7e5e4 !important; 
+    color: #0c0a09 !important;
     padding: 0.2em 0.4em !important;
     border-radius: 0.25rem !important;
 }
 
-/* Fix for large code blocks */
-html.light-mode .prose pre {
-    background-color: #f5f5f4 !important; /* Stone-100 */
-    border: 1px solid #e7e5e4 !important;
-}
-
-html.light-mode .prose pre code {
-    color: #292524 !important;
-}
-
-
-/* --- Tag Styling for Light Mode --- */
-
-/* This targets the tags in the list view and the single post view */
-html.light-mode #blog-list-container span, 
-html.light-mode #view-blog-detail span {
-    background-color: #808000 !important; /* Olive Green */
-    color: #ffffff !important;            /* White text for high contrast */
-    border-color: #556b2f !important;     /* Darker Olive border */
-    font-weight: 500;
-}
-
-/* If you want a softer, more "muted" Olive look to match the Stone aesthetic: */
+/* --- 7. Tags & Badges --- */
 html.light-mode .prose span.text-stone-400,
+html.light-mode #blog-list-container span,
 html.light-mode #view-blog-detail .rounded-full {
-    background-color: #6b705c !important; /* Earthy Olive/Moss Green */
-    color: #f8f9fa !important;
+    background-color: #6b705c !important; /* Earthy Olive Green */
+    color: #ffffff !important;
     border: none !important;
+    padding: 2px 8px !important;
 }
 
-/* Fix for the hover state on tags if they are inside a link */
 html.light-mode a:hover span {
-    background-color: #556b2f !important; /* Darkens on hover */
-    transition: background-color 0.2s ease;
-}
-
-/* Light Mode Button Overrides */
-html.light-mode #theme-toggle {
-    color: #57534e !important; /* Stone-600 */
-}
-
-html.light-mode #theme-toggle:hover {
-    background-color: #e7e5e4 !important; /* Stone-200 */
-    color: #1c1917 !important; /* Stone-900 */
-}
-
-/* Navbar Underline Color for Light Mode */
-html.light-mode nav a {
-    text-decoration-color: #d6d3d1; /* Muted underline */
-}
-
-html.light-mode nav a:hover {
-    text-decoration-color: #1c1917; /* Dark underline on hover */
+    background-color: #4a4e3f !important; /* Darker Olive on hover */
 }
