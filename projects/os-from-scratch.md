@@ -1,13 +1,20 @@
 ---
-title: OS from Scratch
-description: Building a hobby operating system in Rust.
-img: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGEBwtDicAIhDV3iJIsNPD8K4QuWvymSrYt-j_k-KMBQTYXTcEOzJhBRM&s
+title: Kanbai (Local Kanban)
+description: Building a hobby Notion-ish kanban board
+img: https://s3.us-west-2.amazonaws.com/public.notion-static.com/template/bce8172b-4bab-4908-807c-701d0ea2b10f/521f5681-77b6-49e2-add9-f3f18d811061/1723380182490/desktop.jpg
 category: engineering
 ---
+### Goal
+The goal of this project was to build a Kanban board without too many bloated frameworks, work locally first and allow the users to collaborate together.
 
-The goal of this project was to understand how a kernel manages memory and scheduling by writing one from the ground up.
+Link: https://6namdang.github.io/kanbai
 
-### Implementation Details
-1. **Bootloader:** Custom BIOS bootloader.
-2. **Memory Management:** Implemented a buddy allocator.
-3. **Task Switching:** Basic preemptive multitasking.
+I began planning in depth on the platform should look and behave like. For example, the platform should allow the users to drag and drop, open from the side, and do everything just like Notion, but without the signup from Notions.
+
+I like open-sourcing stuff, so I wanted to make something that people would actually use. I wanted to make it looks simplicity
+
+### Implementations Details
+[x] - Kanban Board Drag and Drop
+[x] - Locally save
+[x] - Dynammically load data
+[] - Implement WebRTC for real-time sharing
