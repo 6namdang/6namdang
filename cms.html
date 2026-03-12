@@ -2,85 +2,151 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>6namdang CMS</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
-        .hidden { display: none; }
-        textarea { width: 100%; margin: 10px 0; font-family: monospace; }
-        #login-section { text-align: center; margin-top: 50px; }
-        input[type="password"] { padding: 8px; width: 300px; }
-        button { padding: 8px 16px; cursor: pointer; margin: 2px; }
-        .nav-btn { background-color: #f0f0f0; border: 1px solid #ccc; }
-        .danger-btn { background-color: #ff4444; color: white; border: none; float: right; }
-        .controls { display: flex; gap: 15px; align-items: flex-end; margin-bottom: 10px; flex-wrap: wrap; }
-        .field { display: flex; flex-direction: column; }
-        label { font-size: 0.8em; font-weight: bold; margin-bottom: 4px; }
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --subtle: #888;
+            --accent: #000;
+            --border: #f0f0f0;
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .hidden { display: none !important; }
+
+        header {
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .nav-group { display: flex; gap: 15px; align-items: center; }
+
+        select, input {
+            border: none;
+            background: none;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--text);
+            outline: none;
+        }
+
+        select { cursor: pointer; color: var(--subtle); font-weight: 500; }
+        select:hover { color: var(--accent); }
+
+        input[type="text"] {
+            border-bottom: 1px solid var(--border);
+            padding: 2px 0;
+            width: 140px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 5px;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--subtle);
+        }
+
+        button:hover { color: var(--accent); }
+        .save-btn { color: #2ecc71 !important; font-weight: 600; }
+        .delete-btn { color: #e74c3c !important; }
+
+        main {
+            flex: 1;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #content {
+            width: 100%;
+            height: 100%;
+            border: none;
+            resize: none;
+            outline: none;
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        #login-section {
+            position: fixed; inset: 0; background: var(--bg);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+
+        .status-msg { position: fixed; bottom: 20px; left: 30px; font-size: 11px; color: var(--subtle); text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-    <h1>My Personal GitHub CMS</h1>
-
     <div id="login-section">
-        <input type="password" id="pat-input" placeholder="Enter GitHub PAT">
-        <button id="login-btn">Login</button>
-        <br><br>
-        <button class="nav-btn" onclick="window.location.href='/index.html'">Back to Home</button>
+        <input type="password" id="pat-input" placeholder="Access Token" style="text-align: center; width: 250px; font-size: 18px;">
     </div>
 
-    <div id="cms-section" class="hidden">
-        <button id="logout-btn" style="float: right;">Logout</button>
-        
-        <div class="controls">
-            <div class="field">
-                <label>Collection</label>
-                <select id="folder-select">
-                    <option value="posts">Posts</option>
-                    <option value="projects">Projects</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Existing Files</label>
-                <select id="posts-select"></select>
-            </div>
-            
-            <button id="load">Load</button>
+    <header id="cms-header" class="hidden">
+        <div class="nav-group">
+            <select id="folder-select">
+                <option value="posts">/posts</option>
+                <option value="projects">/projects</option>
+            </select>
+            <select id="posts-select">
+                <option value="">Load file...</option>
+            </select>
         </div>
 
-        <hr>
-
-        <div class="controls">
-            <div class="field">
-                <label>New Filename (e.g. hello.md)</label>
-                <input type="text" id="new-filename" placeholder="my-new-post.md">
-            </div>
-            <button id="create-btn">Create New</button>
+        <div class="nav-group">
+            <input type="text" id="new-filename" placeholder="filename.md">
+            <button id="create-btn">New</button>
+            <span style="color: var(--border)">|</span>
+            <button id="save" class="save-btn">Save</button>
+            <button id="delete-btn" class="delete-btn">Delete</button>
+            <button id="logout-btn">Exit</button>
         </div>
+    </header>
 
-        <textarea id="content" rows="20" placeholder="Write your content here..."></textarea>
-        
-        <br>
-        <button id="save" style="background-color: #4CAF50; color: white; border: none;">Save Changes</button>
-        <button id="delete-btn" class="danger-btn">Delete File</button>
-    </div>
+    <main id="cms-main" class="hidden">
+        <textarea id="content" spellcheck="false" placeholder="..."></textarea>
+    </main>
+
+    <div id="status" class="status-msg"></div>
 
 <script>
     const owner = '6namdang';
     const repo = '6namdang';
 
     const loginSection = document.getElementById('login-section');
-    const cmsSection = document.getElementById('cms-section');
+    const cmsHeader = document.getElementById('cms-header');
+    const cmsMain = document.getElementById('cms-main');
     const patInput = document.getElementById('pat-input');
     const folderSelect = document.getElementById('folder-select');
     const postsSelect = document.getElementById('posts-select');
     const contentArea = document.getElementById('content');
     const newFilenameInput = document.getElementById('new-filename');
+    const statusText = document.getElementById('status');
 
-    function forceLogout(msg) {
-        if (msg) alert(msg);
-        sessionStorage.clear();
-        window.location.href = '/index.html';
+    function notify(msg) {
+        statusText.textContent = msg;
+        setTimeout(() => { statusText.textContent = ''; }, 3000);
     }
 
     const getToken = () => sessionStorage.getItem('gh_pat');
@@ -92,47 +158,70 @@
             const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`, {
                 headers: { Authorization: `token ${token}` }
             });
-            if (!res.ok) throw new Error('Auth Failed');
             const data = await res.json();
-            postsSelect.innerHTML = ''; 
-            data.forEach(file => {
-                if(file.type === 'file') {
-                    const option = document.createElement('option');
-                    option.value = file.path;
-                    option.textContent = file.name;
-                    postsSelect.appendChild(option);
-                }
-            });
+            postsSelect.innerHTML = '<option value="">Load file...</option>'; 
+            if(Array.isArray(data)) {
+                data.forEach(file => {
+                    if(file.type === 'file') {
+                        const option = document.createElement('option');
+                        option.value = file.path;
+                        option.textContent = file.name;
+                        postsSelect.appendChild(option);
+                    }
+                });
+            }
             loginSection.classList.add('hidden');
-            cmsSection.classList.remove('hidden');
-        } catch (err) { forceLogout('Session expired.'); }
+            cmsHeader.classList.remove('hidden');
+            cmsMain.classList.remove('hidden');
+        } catch (err) { sessionStorage.clear(); location.reload(); }
+    }
+
+    function getFrontmatter(filename, folder) {
+        const title = filename.replace('.md', '').replace(/-/g, ' ');
+        const date = new Date().toISOString().split('T')[0];
+        return `---
+title: "${title}"
+date: ${date}
+readTime: 2 min
+author: 6namdang
+tags:
+  - ${folder === 'posts' ? 'blog' : 'project'}
+---
+
+`;
     }
 
     folderSelect.onchange = listFiles;
 
-    document.getElementById('login-btn').onclick = () => {
-        const val = patInput.value.trim();
-        if (val) { sessionStorage.setItem('gh_pat', val); listFiles(); }
+    patInput.onkeypress = (e) => {
+        if (e.key === 'Enter') {
+            sessionStorage.setItem('gh_pat', patInput.value.trim());
+            listFiles();
+        }
     };
 
-    document.getElementById('logout-btn').onclick = () => forceLogout();
-
-    // CREATE: Just sets up the UI for a new file
+    // CREATE NEW
     document.getElementById('create-btn').onclick = () => {
-        const name = newFilenameInput.value.trim();
-        if (!name) return alert('Enter a filename first');
-        window.currentPath = `${folderSelect.value}/${name}`;
-        window.currentSha = null; // No SHA means it's a new file
-        contentArea.value = '';
-        alert(`Ready to create: ${window.currentPath}. Add content and click Save.`);
+        let name = newFilenameInput.value.trim();
+        const folder = folderSelect.value;
+        if (!name) return notify('Enter filename');
+        if (!name.endsWith('.md')) name += '.md';
+        
+        window.currentPath = `${folder}/${name}`;
+        window.currentSha = null;
+        
+        contentArea.value = getFrontmatter(name, folder);
+        contentArea.focus();
+        notify(`Created draft in /${folder}`);
     };
 
-    // READ
-    document.getElementById('load').onclick = async function() {
+    // LOAD FILE
+    document.getElementById('posts-select').onchange = async function() {
         const token = getToken();
+        const path = this.value;
+        if (!path) return;
+        notify('Reading...');
         try {
-            const path = postsSelect.value;
-            if (!path) return;
             const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
                 headers: { Authorization: `token ${token}` }
             });
@@ -140,23 +229,23 @@
             contentArea.value = decodeURIComponent(escape(atob(data.content)));
             window.currentSha = data.sha;
             window.currentPath = path;
-            newFilenameInput.value = ''; // clear create input
-        } catch (err) { forceLogout('Error loading.'); }
+            notify('Opened');
+        } catch (err) { notify('Error loading'); }
     };
 
-    // UPDATE & CREATE (Save)
+    // SAVE Changes
     document.getElementById('save').onclick = async function() {
         const token = getToken();
+        if (!window.currentPath) return notify('Nothing to save');
+        
+        notify('Syncing...');
         try {
-            if (!window.currentPath) return alert('Load or Create a file first!');
             const content = contentArea.value;
-            const base64 = btoa(unescape(encodeURIComponent(content)));
-            
             const body = {
-                message: `CMS Update: ${window.currentPath}`,
-                content: base64
+                message: `cms write: ${window.currentPath}`,
+                content: btoa(unescape(encodeURIComponent(content)))
             };
-            if (window.currentSha) body.sha = window.currentSha; // Only needed for updates
+            if (window.currentSha) body.sha = window.currentSha;
 
             const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${window.currentPath}`, {
                 method: 'PUT',
@@ -164,37 +253,37 @@
                 body: JSON.stringify(body)
             });
 
-            if (!res.ok) throw new Error('Save failed');
+            if (!res.ok) throw new Error();
             const data = await res.json();
-            alert('Saved successfully!');
             window.currentSha = data.content.sha;
-            listFiles(); // Refresh dropdown
-        } catch (err) { forceLogout('Critical error during save.'); }
+            notify('Saved to GitHub');
+            listFiles(); 
+        } catch (err) { notify('Save failed'); }
     };
 
-    // DELETE
+    // DELETE File
     document.getElementById('delete-btn').onclick = async function() {
-        if (!window.currentPath || !window.currentSha) return alert('Load a file to delete it.');
-        if (!confirm(`Are you sure you want to delete ${window.currentPath}?`)) return;
+        if (!window.currentPath || !window.currentSha) return;
+        if (!confirm('Delete permanently?')) return;
 
         const token = getToken();
         try {
-            const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${window.currentPath}`, {
+            await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${window.currentPath}`, {
                 method: 'DELETE',
                 headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    message: `CMS Delete: ${window.currentPath}`,
+                    message: `cms delete: ${window.currentPath}`,
                     sha: window.currentSha
                 })
             });
-            if (!res.ok) throw new Error('Delete failed');
-            alert('Deleted successfully');
             contentArea.value = '';
             window.currentPath = null;
-            window.currentSha = null;
+            notify('Deleted');
             listFiles();
-        } catch (err) { forceLogout('Error during deletion.'); }
+        } catch (err) { notify('Delete failed'); }
     };
+
+    document.getElementById('logout-btn').onclick = () => { sessionStorage.clear(); location.reload(); };
 
     if (getToken()) listFiles();
 </script>
