@@ -1,42 +1,3 @@
-<div align="center">
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&pause=1000&color=2EA043&center=true&vCenter=true&width=600&lines=Hi+%F0%9F%91%8B%2C+I'm+Hoang+Dang;Machine+Learning+Researcher;Building+AI+for+Scientific+Discovery;Graph+Neural+Networks+%7C+Healthcare+AI" alt="Typing SVG" />
-
-### Machine Learning Researcher building AI systems for scientific discovery
-Interested in machine learning, computational biology, graph representation learning, and healthcare AI.
-
-<br/>
-
-<a href="https://www.linkedin.com/in/6namdang" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
-</a>
-<a href="mailto:hnd@mit.edu">
-  <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
-</a>
-<a href="https://github.com/6namdang" target="_blank">
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
-</a>
-
-<img src="https://komarev.com/ghpvc/?username=6namdang&label=Profile+Views&color=2ea043&style=for-the-badge" alt="profile views" />
-
-</div>
-
-<br/>
-
-## 🧬 Current Interests
-
-<img align="right" width="380" src="https://raw.githubusercontent.com/aymanch-03/aymanch-03/main/gif3.gif" />
-
-- 🔬 Machine Learning for Science
-- 🧫 Computational Biology
-- 💊 Drug Discovery
-- 🕸️ Graph Neural Networks
-- 🏗️ Foundation Models
-- 🏥 Healthcare AI
-
-<br clear="right"/>
-
----
 
 ## 📊 GitHub Stats
 
@@ -103,7 +64,7 @@ Interested in machine learning, computational biology, graph representation lear
 <div align="center">
 
 ### 💬 
-*Using machine learning to accelerate scientific discovery.*
+*Random Guy*
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=2EA043&height=100&section=footer" />
 
