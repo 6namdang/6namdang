@@ -64,7 +64,7 @@
 <div align="center">
 
 ### 💬 
-*Random Guy*
+*Please don't bullshit me*
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=2EA043&height=100&section=footer" />
 
