@@ -11,48 +11,6 @@
 </div>
 
 
----
-
-## 🛠️ Tech Stack
-
-<div align="center">
-
-**Languages**
-<br/>
-<img src="https://skillicons.dev/icons?i=python,ts,js,java,mysql" />
-
-**Machine Learning**
-<br/>
-<img src="https://skillicons.dev/icons?i=pytorch,tensorflow,sklearn" />
-<img src="https://img.shields.io/badge/XGBoost-005A9C?style=for-the-badge" />
-<img src="https://img.shields.io/badge/LightGBM-9ACD32?style=for-the-badge" />
-<img src="https://img.shields.io/badge/RDKit-4C9A2A?style=for-the-badge" />
-
-**Backend**
-<br/>
-<img src="https://skillicons.dev/icons?i=fastapi,nodejs" />
-<img src="https://img.shields.io/badge/REST%20APIs-25D366?style=for-the-badge" />
-
-**Frontend**
-<br/>
-<img src="https://skillicons.dev/icons?i=react,nextjs,expo" />
-
-**Databases**
-<br/>
-<img src="https://skillicons.dev/icons?i=postgres,mysql,redis,dynamodb" />
-
-**Cloud & DevOps**
-<br/>
-<img src="https://skillicons.dev/icons?i=aws,docker,linux,git,githubactions" />
-
-**Data Science**
-<br/>
-<img src="https://skillicons.dev/icons?i=numpy,pandas,jupyter" />
-<img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white" />
-
-</div>
-
----
 
 
 ---
