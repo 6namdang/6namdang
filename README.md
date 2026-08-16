@@ -1,10 +1,6 @@
 
 ## 📊 GitHub Stats
 
-<div align="center">
-  <img width="49%" src="https://github-readme-stats-sigma-five.vercel.app/api?username=6namdang&show_icons=true&theme=github_dark&hide_border=true&rank_icon=github&bg_color=0d1117&title_color=2ea043&icon_color=2ea043" />
-  <img width="49%" src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=6namdang&layout=compact&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=2ea043" />
-</div>
 
 <div align="center">
   <img width="98%" src="https://streak-stats.demolab.com?user=6namdang&theme=github-dark-blue&hide_border=true&background=0D1117&ring=2EA043&fire=2EA043&currStreakLabel=2EA043" />
