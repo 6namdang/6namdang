@@ -18,7 +18,7 @@
 <div align="center">
 
 ### 💬 
-*Please don't bullshit me*
+*HI!!!*
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=2EA043&height=100&section=footer" />
 
