@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #1a1d21;
+  --muted: #3f4754;
+  --line: #d5d9de;
+  --navy: #14365c;
+  --paper: #ffffff;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-paper: var(--paper);
+  --font-sans: var(--font-plex-sans), "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-plex-serif), "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  color-scheme: light;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #d6e2ef;
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 40;
+  background: #ffffff;
+  color: var(--ink);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--line);
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  header {
+    position: static;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
